@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="freeComment">
+
+	<select id="count" parameterType="dto.BoardDTO" resultType="int">
+		SELECT count(*) FROM nandal_free_comment where pnum = #{pnum}
+	</select>
+
+	<select id="list" parameterType="dto.PageDTO"
+		resultType="dto.BoardDTO">
+      select b.*, u.nickname from(
+         select * from nandal_free_comment
+      		where pnum = #{pnum}
+			order by ref asc, re_step asc) b
+          left join nandal_user u 
+          on b.writer=u.usercode
+		 order by num
+	</select>
+
+	<insert id="save" parameterType="dto.BoardDTO">
+		INSERT INTO nandal_free_comment(pnum, num, writer, reg_date, ref, re_step, re_level, subject, ip)
+		VALUES(#{pnum}, nandal_free_comment_num_seq.nextval, #{writer, jdbcType=VARCHAR},sysdate, 
+		<choose>
+			<when test="ref==0">
+				nandal_free_comment_num_seq.nextval
+			</when>
+			<otherwise>
+				#{ref}
+			</otherwise>
+		</choose>
+		, #{re_step}, #{re_level}, #{subject, jdbcType=VARCHAR}, #{ip,	jdbcType=VARCHAR})
+	</insert>
+
+
+	<update id="reStepCount" parameterType="dto.BoardDTO">
+		UPDATE nandal_free_comment SET
+		re_step
+		= re_step + 1
+		WHERE ref=#{ref} AND re_step > #{re_step}
+	</update>
+
+	<update id="update" parameterType="dto.BoardDTO">
+		UPDATE nandal_free_comment
+		SET subject=#{subject}
+		WHERE num=#{num}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM nandal_free_comment
+		WHERE
+		num=#{num}
+	</delete>
+</mapper>

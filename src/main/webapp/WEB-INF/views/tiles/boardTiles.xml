@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<!-- 공지게시판 tiles -->
+	<definition name="nlist" extends="index">
+		<put-attribute name="title" value="공지게시판" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_notice/list.jsp" />
+	</definition>
+
+	<!-- 리뷰게시판 tiles -->
+	<definition name="rlist" extends="index">
+		<put-attribute name="title" value="리뷰게시판" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_review/list.jsp" />
+	</definition>
+
+	<!-- 질문게시판 tiles -->
+	<definition name="qlist" extends="index">
+		<put-attribute name="title" value="질문게시판" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_qna/list.jsp" />
+	</definition>
+
+	<!-- 자유게시판 tiles -->
+	<definition name="flist" extends="index">
+		<put-attribute name="title" value="자유게시판" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_free/list.jsp" />
+	</definition>
+
+
+
+
+	<!-- 자유게시판 글쓰기 -->
+	<definition name="fwrite" extends="index">
+		<put-attribute name="title" value="자유글쓰기" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_free/write.jsp" />
+	</definition>
+
+	<!-- 자유게시판 상세 뷰 -->
+	<definition name="fview" extends="index">
+		<put-attribute name="title" value="자유상세뷰" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_free/view.jsp" />
+	</definition>
+
+	<!-- 자유게시판 수정 뷰 -->
+	<definition name="fupdate" extends="index">
+		<put-attribute name="title" value="자유수정뷰" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_free/update.jsp" />
+	</definition>
+
+
+
+	<!-- 공지게시판 글쓰기 -->
+	<definition name="nwrite" extends="index">
+		<put-attribute name="title" value="글쓰기" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_notice/write.jsp" />
+	</definition>
+
+	<!-- 공지게시판 상세 뷰 -->
+	<definition name="nview" extends="index">
+		<put-attribute name="title" value="공지상세뷰" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_notice/view.jsp" />
+	</definition>
+
+	<!-- 공지게시판 수정 뷰 -->
+	<definition name="nupdate" extends="index">
+		<put-attribute name="title" value="공지수정뷰" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_notice/update.jsp" />
+	</definition>
+
+
+
+	<!-- 질문게시판 글쓰기 -->
+	<definition name="qwrite" extends="index">
+		<put-attribute name="title" value="글쓰기" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_qna/write.jsp" />
+	</definition>
+
+	<!-- 질문게시판 상세 뷰 -->
+	<definition name="qview" extends="index">
+		<put-attribute name="title" value="질문상세뷰" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_qna/view.jsp" />
+	</definition>
+
+	<!-- 질문게시판 수정 뷰 -->
+	<definition name="qupdate" extends="index">
+		<put-attribute name="title" value="질문수정뷰" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_qna/update.jsp" />
+	</definition>
+
+	<!-- 리뷰게시판 글쓰기 -->
+	<definition name="rwrite" extends="index">
+		<put-attribute name="title" value="글쓰기" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_review/write.jsp" />
+	</definition>
+
+	<!-- 리뷰게시판 상세 뷰 -->
+	<definition name="rview" extends="index">
+		<put-attribute name="title" value="질문상세뷰" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_review/view.jsp" />
+	</definition>
+
+	<!-- 리뷰게시판 수정 뷰 -->
+	<definition name="rupdate" extends="index">
+		<put-attribute name="title" value="질문수정뷰" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board_review/update.jsp" />
+	</definition>
+
+
+
+
+
+
+</tiles-definitions>

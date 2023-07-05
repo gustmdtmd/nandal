@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+<tiles-definitions> 
+	<definition name="admin" template="/WEB-INF/views/admin/admin_layout.jsp">
+		<put-attribute name="title" value="관리자 페이지"/>
+		<put-attribute name="admin_header" value="/WEB-INF/views/admin/admin_header.jsp" />
+		<put-attribute name="admin_body" value="/WEB-INF/views/admin/admin_body.jsp"/>
+		<put-attribute name="admin_footer" value="/WEB-INF/views/template/footer.jsp" />
+	</definition>
+	
+	<definition name="admin_login" extends="admin">
+		<put-attribute name="title" value="관리자 로그인" />
+		<put-attribute name="admin_body" value="/WEB-INF/views/admin/admin_login.jsp"/>
+	</definition>
+	
+	
+	<definition name="admin_member" extends="admin">
+		<put-attribute name="title" value="회원 보기" />
+		<put-attribute name="admin_header" value="/WEB-INF/views/admin/admin_topmenu.jsp" />
+		<put-attribute name="admin_body" value="/WEB-INF/views/admin/admin_member.jsp"/>
+	</definition>
+	<definition name="anlist" extends="admin">
+		<put-attribute name="title" value="공지 보기" />
+		<put-attribute name="admin_header" value="/WEB-INF/views/admin/admin_topmenu.jsp" />
+		<put-attribute name="admin_body" value="/WEB-INF/views/admin/admin_notice.jsp"/>
+	</definition>
+	<definition name="admin_review" extends="admin">
+		<put-attribute name="title" value="전체 리뷰 보기" />
+		<put-attribute name="admin_header" value="/WEB-INF/views/admin/admin_topmenu.jsp" />
+		<put-attribute name="admin_body" value="/WEB-INF/views/admin/admin_review.jsp"/>
+	</definition>
+	<definition name="admin_qna" extends="admin">
+		<put-attribute name="title" value="전체 질문 보기" />
+		<put-attribute name="admin_header" value="/WEB-INF/views/admin/admin_topmenu.jsp" />
+		<put-attribute name="admin_body" value="/WEB-INF/views/admin/admin_qna.jsp"/>
+	</definition>
+
+	<definition name="admin_modify" extends="admin">
+		<put-attribute name="title" value="수정글쓰기" />
+		<put-attribute name="admin_header" value="/WEB-INF/views/admin/admin_topmenu.jsp" />
+		<put-attribute name="admin_body" value="/WEB-INF/views/admin/admin_modify.jsp"/>
+	</definition>
+
+
+</tiles-definitions>

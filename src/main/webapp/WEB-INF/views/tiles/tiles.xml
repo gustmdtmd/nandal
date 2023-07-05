@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+<tiles-definitions> 
+	<!-- 기본 tiles -->
+	<definition name="index" template="/WEB-INF/views/template/layout.jsp">
+		<put-attribute name="title" value="NanDal!!!"/>
+		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/template/menu.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/body.jsp"/>
+	</definition>
+	
+	<!-- 메뉴 tiles -->
+	<definition name="recommand" extends="index">
+		<put-attribute name="title" value="추천 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/recommand/recommand.jsp"/>
+	</definition>
+	
+	<definition name="paldo" extends="index">
+		<put-attribute name="title" value="지도 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/paldo/paldo.jsp"/>
+	</definition>
+	
+	<definition name="calendar" extends="index">
+		<put-attribute name="title" value="달력 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/calendar/calendar.jsp"/>
+	</definition>
+	
+	<definition name="bookmarklist" extends="index">
+		<put-attribute name="title" value="즐겨찾기 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/bookmarklist/bookmarklist.jsp"/>
+	</definition>
+	
+	<definition name="notice" extends="index">
+		<put-attribute name="title" value="공지 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/board/list.jsp"/>
+	</definition>
+	
+
+	
+	<!-- 세부정보 tiles -->
+	<definition name="detail" extends="index">
+		<put-attribute name="title" value="조인 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/detail/detail.jsp"/>
+	</definition>
+	
+	
+	<definition name="detail1" extends="index">
+		<put-attribute name="title" value="조인 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/detail/detail1.jsp"/>
+	</definition>
+		<definition name="detail2" extends="index">
+		<put-attribute name="title" value="조인 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/detail/detail2.jsp"/>
+	</definition>
+		<definition name="detail3" extends="index">
+		<put-attribute name="title" value="조인 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/detail/detail3.jsp"/>
+	</definition>
+</tiles-definitions>

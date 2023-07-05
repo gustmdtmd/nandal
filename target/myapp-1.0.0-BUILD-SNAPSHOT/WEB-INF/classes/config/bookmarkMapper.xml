@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bookmark">
+
+	<select id="cheak" resultType="int">
+		select count(*) from nandal_bookmark 
+		where usercode=#{usercode} and contentid=#{contentid}
+	</select>
+
+	<insert id="add">
+		insert into NANDAL_bookmark(usercode, contentid, bookmarkdate)
+		values( #{usercode}, #{contentid}, sysdate)
+		
+	</insert>
+	
+	<delete id="del">
+		DELETE FROM NANDAL_bookmark
+		where usercode=#{usercode} and contentid=#{contentid}
+	</delete>
+
+</mapper>
+

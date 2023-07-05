@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reviewBoard">
+
+	<select id="count" resultType="int">
+		SELECT count(*) FROM nandal_review_board where contentid=#{contentid}
+		<if test='searchKey == "subject" or searchKey == "content"'>
+			AND ${searchKey} LIKE '%'||#{searchWord}||'%'
+			
+		</if>
+		<if test='searchKey == "total"'>
+			AND subject LIKE '%'||#{searchWord}||'%'
+			OR content LIKE '%'||#{searchWord}||'%'
+			
+		</if>
+	</select>
+
+	<select id="list" parameterType="dto.cardPageDTO"
+		resultType="dto.BoardDTO">
+      select b.*, u.nickname from 
+      (select rownum as rm, a.* from (
+         select * from nandal_review_board
+         where contentid=#{contentid}
+      	<if test='searchKey == "subject" or searchKey == "content"'>
+			and ${searchKey} LIKE '%'||#{searchWord}||'%'
+		</if>
+		<if test='searchKey == "total"'>
+			and subject LIKE '%'||#{searchWord}||'%'
+			OR content LIKE '%'||#{searchWord}||'%'
+		</if>
+		  order by ref desc, re_step asc) a)b
+          left join nandal_user u 
+          on b.writer=u.usercode
+   <![CDATA[ 
+      where b.rm>=#{startRow} and b.rm <=#{endRow}
+   ]]>
+   		order by ref desc, re_step asc
+	</select>
+
+	<insert id="save" parameterType="dto.BoardDTO">
+		INSERT INTO nandal_review_board(contentid, num, writer, subject, reg_date,
+		readcount, ref, re_step, re_level, content, ip, upload)
+		VALUES(#{contentid}, nandal_review_board_num_seq.nextval, #{writer, jdbcType=VARCHAR},
+		#{subject},
+		sysdate, 0,
+		<choose>
+			<when test="ref==0">
+				nandal_review_board_num_seq.nextval
+			</when>
+			<otherwise>
+				#{ref}
+			</otherwise>
+		</choose>
+		, #{re_step}, #{re_level}, #{content, jdbcType=VARCHAR}, #{ip,
+		jdbcType=VARCHAR}, #{upload, jdbcType=VARCHAR}
+
+		)
+	</insert>
+
+	<update id="readCount" parameterType="int">
+		UPDATE nandal_review_board SET
+		readcount
+		= readcount + 1
+		WHERE num=#{num}
+	</update>
+
+	<select id="view" parameterType="int"
+		resultType="dto.BoardDTO">
+		SELECT * FROM
+		nandal_review_board
+		WHERE num=#{num}
+	</select>
+
+	<select id="uploadFile" parameterType="int" resultType="String">
+		SELECT
+		upload FROM nandal_review_board
+		WHERE num=#{num}
+	</select>
+
+	<update id="reStepCount" parameterType="dto.BoardDTO">
+		UPDATE nandal_review_board SET
+		re_step
+		= re_step + 1
+		WHERE ref=#{ref} AND re_step > #{re_step}
+	</update>
+
+	<update id="update" parameterType="dto.BoardDTO">
+		UPDATE nandal_review_board
+		SET subject=#{subject},
+		content=#{content}
+		<if test="upload!=null">
+			, upload=#{upload}
+		</if>
+		WHERE num=#{num}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM nandal_review_board
+		WHERE
+		num=#{num}
+	</delete>
+</mapper>

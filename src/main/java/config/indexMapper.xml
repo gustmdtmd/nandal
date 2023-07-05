@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="index">
+
+	<select id="list" resultType="dto.DetailDTO">
+		select * from (select * from nandal_content_info 
+		order by readcount desc, title asc)
+		<![CDATA[ 
+		where rownum <5
+		]]>
+	</select>
+	
+	
+	<select id="genderlist" resultType="dto.DetailDTO">
+		select * from (select * from nandal_content_info 
+		order by readcount desc, title asc)
+		<![CDATA[ 
+		where rownum <5
+		]]>
+	</select>
+	
+	<select id="birthlist" resultType="dto.DetailDTO">
+		select * from (select * from nandal_content_info 
+		order by readcount desc, title asc)
+		<![CDATA[ 
+		where rownum <5
+		]]>
+	</select>
+	
+	<select id="loclist" resultType="dto.DetailDTO">
+		select * from (select * from nandal_content_info 
+		order by readcount desc, title asc)
+		<![CDATA[ 
+		where rownum <5
+		]]>
+	</select>
+</mapper>

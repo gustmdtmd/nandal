@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- 리뷰게시판 빈 선언 -->
+	<!-- [6] BoardDaoImp 빈 선언 -->
+	<bean id="review_dao" class="dao.ReviewBoardDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<!-- [7] BoardServiceImp 빈 선언 -->
+	<bean id="review_service" class="service.ReviewBoardServiceImp">
+		<property name="review_dao" ref="review_dao"></property>
+	</bean>
+
+	<!-- [8] Controller 빈 선언 -->
+	<bean class="controller.ReviewBoardController">
+		<property name="review_service" ref="review_service" />
+	</bean>
+
+
+	<!-- 다운로드 뷰 선언 -->
+	<bean id="review_download" class="view.ReviewBoardDownLoadView">
+		<property name="review_dao" ref="review_dao" />
+	</bean>
+	
+	<!-- 질문게시판 빈 선언 -->
+	<!-- [6] BoardDaoImp 빈 선언 -->
+	<bean id="qna_dao" class="dao.QnaBoardDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<!-- [7] BoardServiceImp 빈 선언 -->
+	<bean id="qna_service" class="service.QnaBoardServiceImp">
+		<property name="qna_dao" ref="qna_dao"></property>
+	</bean>
+
+	<!-- [8] Controller 빈 선언 -->
+	<bean class="controller.QnaBoardController">
+		<property name="qna_service" ref="qna_service" />
+	</bean>
+	
+	<!-- 다운로드 뷰 선언 -->
+	<bean id="qna_download" class="view.QnaBoardDownLoadView">
+		<property name="qna_dao" ref="qna_dao" />
+	</bean>
+	
+	
+	
+	<!-- 공지게시판 빈 선언 -->
+	<!-- [6] BoardDaoImp 빈 선언 -->
+	<bean id="notice_dao" class="dao.NoticeBoardDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<!-- [7] BoardServiceImp 빈 선언 -->
+	<bean id="notice_service" class="service.NoticeBoardServiceImp">
+		<property name="notice_dao" ref="notice_dao"></property>
+	</bean>
+
+	<!-- [8] Controller 빈 선언 -->
+	<bean class="controller.NoticeBoardController">
+		<property name="notice_service" ref="notice_service" />
+	</bean>
+	
+	<!-- 다운로드 뷰 선언 -->
+	<bean id="notice_download" class="view.NoticeBoardDownLoadView">
+		<property name="notice_dao" ref="notice_dao" />
+	</bean>
+	
+	
+	
+	<!-- 자유게시판 빈 선언 -->
+	<!-- [6] BoardDaoImp 빈 선언 -->
+	<bean id="free_dao" class="dao.FreeBoardDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<!-- [7] BoardServiceImp 빈 선언 -->
+	<bean id="free_service" class="service.FreeBoardServiceImp">
+		<property name="free_dao" ref="free_dao"></property>
+	</bean>
+
+	<!-- [8] Controller 빈 선언 -->
+	<bean class="controller.FreeBoardController">
+		<property name="free_service" ref="free_service" />
+	</bean>
+
+	<!-- 다운로드 뷰 선언 -->
+	<bean id="free_download" class="view.FreeBoardDownLoadView">
+		<property name="free_dao" ref="free_dao" />
+	</bean>
+	
+	</beans>

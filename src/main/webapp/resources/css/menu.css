@@ -1,0 +1,25 @@
+/* 메인 메뉴 시작*/
+body #main_menu {
+	height: 38px;
+	margin-top: 15px;
+	background-color: #4e4c4d;
+}
+
+body #main_menu ul {
+	margin: auto;
+	text-align: center;
+}
+
+body #main_menu li {
+	display: inline;
+	margin: 0 57px;
+}
+
+body #main_menu a {
+	height: 20px;
+	color: #ffffff;
+}
+
+body #main_menu a:hover {
+	color: #000000;
+}

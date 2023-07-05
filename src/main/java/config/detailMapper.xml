@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="detail">
+
+	<select id="exist" resultType="int">
+		SELECT count(*) FROM NANDAL_content_info where contentid=#{contentid}
+	</select>
+
+	<insert id="insertContentid">
+		insert into NANDAL_content_info(contentid, contenttypeid, readcount, title, firstimage)
+		values(#{contentid}, #{contenttypeid}, 0, #{title}, #{firstimage})
+	</insert>	
+
+
+	<update id="readCount" parameterType="int">
+		UPDATE NANDAL_content_info SET 
+		readcount = readcount + 1
+		WHERE contentid=${contentid}
+	</update>
+	
+
+	<insert id="locCount">
+		insert into NANDAL_loc_choice(usercode, choicedate, ${areacode})
+		values(
+		<if test='usercode != null'>
+			#{usercode}, 
+		</if>
+		<if test="usercode == null">
+			0,		
+		</if>
+		sysdate, 1)
+	</insert>
+	
+	<insert id="cat3Count">
+		insert into NANDAL_user_choice(usercode, choicedate, ${cat3})
+				values(
+		<if test='usercode != null'>
+			#{usercode}, 
+		</if>
+		<if test="usercode == null">
+			0,		
+		</if>
+		sysdate, 1)
+	</insert>
+
+</mapper>
+

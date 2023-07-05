@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="dto.UserDTO">
+		INSERT INTO NANDAL_USER(
+		usercode,
+		id,
+		password,
+		nickname, img, birth, gender,
+		loc, phone, email,
+		usergrade, joindate)
+		VALUES(
+		usercode_num_seq.nextval,
+		#{id},
+		#{password},
+		#{nickname}, #{img}, #{birth},
+		#{gender}, #{loc},
+		#{phone},
+		#{email}, 1, sysdate)
+	</insert>
+
+	<!-- 아이디 중복검사 -->
+	<select id="idCheck" parameterType="dto.UserDTO" resultType="int">
+		SELECT count(*)
+		FROM NANDAL_USER
+		WHERE id=#{id}
+	</select>
+
+	<!-- 닉네임 중복검사 -->
+	<select id="nickCheck" parameterType="dto.UserDTO" resultType="int">
+		SELECT count(*)
+		FROM NANDAL_USER
+		WHERE nickname=#{nickname}
+	</select>
+
+	<!-- 로그인 -->
+	<select id="login" parameterType="dto.UserDTO" resultType="dto.UserDTO">
+		SELECT *
+		FROM NANDAL_USER
+		WHERE id=#{id} and
+		password=#{password}
+	</select>
+
+	<select id="idpsCheck" parameterType="dto.UserDTO" resultType="int">
+		SELECT count(*)
+		FROM NANDAL_USER
+		WHERE id=#{id} and
+		password=#{password}
+	</select>
+
+	<!-- 마이페이지 -->
+	<select id="view" parameterType="Object" resultType="dto.UserDTO">
+		SELECT * FROM NANDAL_USER
+		WHERE id=#{id}
+	</select>
+
+	<!-- 회원정보수정 -->
+	<update id="modify" parameterType="dto.UserDTO">
+		UPDATE NANDAL_USER
+		SET nickname=#{nickname}, password=#{password}, phone=#{phone},
+		email=#{email}, loc=#{loc},
+		<if test="img!=null">
+			img=#{img}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<!-- 파일 -->
+	<select id="uploadFile" parameterType="int" resultType="String">
+		SELECT img 
+		FROM NANDAL_USER
+		WHERE usercode=#{usercode}
+	</select>
+
+	<!-- 회원탈퇴 -->
+	<update id="quit" parameterType="dto.UserDTO">
+		UPDATE NANDAL_USER
+		SET usergrade=0
+		WHERE id=#{id} and password=#{password}
+	</update>
+
+
+
+	<!-- 내가 작성한 리뷰 총계 -->
+	<select id="reviewcount" resultType="int">
+		SELECT count(*) FROM nandal_review_board where writer=#{writer}
+		<if test='searchKey == "subject" or searchKey == "content"'>
+			AND ${searchKey} LIKE '%'||#{searchWord}||'%'
+		</if>
+		<if test='searchKey == "total"'>
+			AND subject LIKE '%'||#{searchWord}||'%'
+			OR content LIKE '%'||#{searchWord}||'%'			
+		</if>
+	</select>
+
+	<!-- 내가 작성한 리뷰 -->
+	<select id="reviewlist" parameterType="dto.cardPageDTO" resultType="dto.BoardDTO">
+      select b.*, u.nickname from 
+      (select rownum as rm, a.* from (
+         select * from nandal_review_board
+         where writer=#{writer}
+      	<if test='searchKey == "subject" or searchKey == "content"'>
+			and ${searchKey} LIKE '%'||#{searchWord}||'%'
+		</if>
+		<if test='searchKey == "total"'>
+			and subject LIKE '%'||#{searchWord}||'%'
+			OR content LIKE '%'||#{searchWord}||'%'
+		</if>
+		  order by num DESC) a)b
+          left join nandal_user u 
+          on b.writer=u.usercode
+   <![CDATA[ 
+      where b.rm>=#{startRow} and b.rm <=#{endRow}
+   ]]>
+   		order by num DESC
+	</select>
+
+	<!-- 내가 작성한 질문 총계 -->
+	<select id="qnacount" resultType="int">
+		SELECT count(*) FROM nandal_qna_board where writer=#{writer}
+		<if test='searchKey == "subject" or searchKey == "content"'>
+			AND ${searchKey} LIKE '%'||#{searchWord}||'%'
+			
+		</if>
+		<if test='searchKey == "total"'>
+			AND subject LIKE '%'||#{searchWord}||'%'
+			OR content LIKE '%'||#{searchWord}||'%'
+			
+		</if>
+	</select>
+
+	<!-- 내가 작성한 질문 -->
+	<select id="qnalist" parameterType="dto.PageDTO"
+		resultType="dto.BoardDTO">
+      select b.*, u.nickname from 
+      (select rownum as rm, a.* from (
+         select * from nandal_qna_board
+         where writer=#{writer}
+      	<if test='searchKey == "subject" or searchKey == "content"'>
+			and ${searchKey} LIKE '%'||#{searchWord}||'%'
+		</if>
+		<if test='searchKey == "total"'>
+			and subject LIKE '%'||#{searchWord}||'%'
+			OR content LIKE '%'||#{searchWord}||'%'
+		</if>
+		  order by num DESC) a)b
+          left join nandal_user u 
+          on b.writer=u.usercode
+   <![CDATA[ 
+      where b.rm>=#{startRow} and b.rm <=#{endRow}
+   ]]>
+   		order by num DESC
+	</select>	
+	
+	<!-- 내 북마크 총계 -->
+	<select id="bookmarkcount" resultType="int">
+		select count(*) from (
+		select i.title, u.nickname, b.* from 
+		nandal_bookmark b
+		left join nandal_content_info i
+		on i.contentid = b.contentid
+		left join nandal_user u 
+		on b.usercode=u.usercode)
+		where usercode = #{usercode}
+		<if test='searchKey == "total"'>
+			and title LIKE '%'||#{searchWord}||'%'
+		</if>
+		
+	</select>
+
+	<!-- 내 북마크 리스트 -->  
+	
+	<select id="bookmarklist" parameterType="dto.UserDTO" resultType="dto.DetailDTO">
+		select i.*, u.nickname, b.bookmarkdate from 
+		nandal_bookmark b
+		left join nandal_content_info i
+		on i.contentid = b.contentid
+		left join nandal_user u 
+		on b.usercode=u.usercode
+		where b.usercode = #{usercode}
+		order by b.bookmarkdate desc
+	</select>
+</mapper>

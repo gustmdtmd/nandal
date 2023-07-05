@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- [6] Admin_MemberDaoImp 빈 선언 -->
+	<bean id="admin_MemberDao" class="dao.Admin_MemberDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<!-- [7] AdminServiceImp 빈 선언 -->
+	<bean id="admin_service" class="service.AdminServiceImp">
+		<property name="admin_MemberDao" ref="admin_MemberDao"></property>
+	</bean>
+
+
+	<bean class="controller.AdminController" >
+		<property name="admin_service" ref="admin_service" />
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	
+		<!-- 공지게시판 빈 선언 -->
+	<!-- [6] BoardDaoImp 빈 선언 -->
+	<bean id="anotice_dao" class="dao.AdminNoticeBoardDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<!-- [7] BoardServiceImp 빈 선언 -->
+	<bean id="anotice_service" class="service.AdminNoticeBoardServiceImp">
+		<property name="anotice_dao" ref="anotice_dao"></property>
+	</bean>
+
+	<!-- [8] Controller 빈 선언 -->
+	<bean class="controller.AdminNoticeBoardController">
+		<property name="anotice_service" ref="anotice_service" />
+	</bean>
+	
+	<!-- 다운로드 뷰 선언 -->
+	<bean id="notice_download" class="view.NoticeBoardDownLoadView">
+		<property name="notice_dao" ref="notice_dao" />
+	</bean>
+	
+	
+	
+
+	
+</beans>

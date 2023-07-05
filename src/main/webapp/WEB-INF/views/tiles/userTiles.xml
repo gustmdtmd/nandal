@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+<tiles-definitions> 
+	<!-- 내정보 tiles -->
+	<definition name="user" extends="index">
+		<put-attribute name="title" value="내정보 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/user/user.jsp"/>
+	</definition>
+	
+	<definition name="login" extends="index">
+		<put-attribute name="title" value="로그인 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/user/login.jsp"/>
+	</definition>
+	
+	<definition name="terms" extends="index">
+		<put-attribute name="title" value="이용약관 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/user/terms.jsp"/>
+	</definition>
+	
+	<definition name="join" extends="index">
+		<put-attribute name="title" value="조인 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/user/join.jsp"/>
+	</definition>
+	
+	<definition name="modify" extends="index">
+		<put-attribute name="title" value="수정 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/user/modify.jsp"/>
+	</definition>
+	
+	<definition name="quit" extends="index">
+		<put-attribute name="title" value="탈퇴 뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/user/quit.jsp"/>
+	</definition>
+	
+	<definition name="userreview" extends="index">
+		<put-attribute name="title" value="내가 작성한 리뷰" />
+		<put-attribute name="body" value="/WEB-INF/views/user/review/list.jsp"/>
+	</definition>
+	
+	<definition name="userqna" extends="index">
+		<put-attribute name="title" value="내가 작성한 질문" />
+		<put-attribute name="body" value="/WEB-INF/views/user/qna/list.jsp"/>
+	</definition>
+	
+	<definition name="userbookmark" extends="index">
+		<put-attribute name="title" value="내가 찜한 관광정보" />
+		<put-attribute name="body" value="/WEB-INF/views/user/bookmark/list.jsp"/>
+	</definition>
+</tiles-definitions>

@@ -1,0 +1,20 @@
+#bodywrap{
+  width:80%;
+  margin:10px auto;
+}
+
+table,tr,th,td{
+   border:1px solid black;
+   border-collapse: collapse;
+}
+
+
+ .pagelist a{
+    text-decoration: none;
+    color:black;
+ }
+ 
+ .pagelist a:hover, .pagelist .pagecolor{
+   text-decoration: underline;
+   color:red
+ }

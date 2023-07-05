@@ -1,0 +1,121 @@
+/*가운데 정렬*/
+.ibx {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.pbx {
+  float: left;
+  height: 100%;
+  padding: 10px;
+  /*박스가 패딩때문에 커지는 것을 막아준다*/
+  box-sizing: border-box;
+}
+/*상단*/
+.top {
+  position: relative;
+  height: 110px;
+  z-index: 999; /*가장 위로 배치*/
+}
+
+/*메뉴*/
+.gnb {
+  width: 100%;
+  height: 40px;
+}
+.gnb ol {
+  position: absolute;
+  background-color: #666;
+}
+
+.gnb li {
+  position: relative;
+  width: 400px;
+}
+
+.gnb a {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  font-size: 20px;
+  font-weight: bolder;
+  line-height: 50px;
+  text-align: center;
+  background-color: rgb(22, 22, 22, 0.8);
+
+}
+
+/*==============*/
+/*로고*/
+.top1 {
+  width: 400px;
+  text-align: center;
+}
+/*검색*/
+.top2 {
+  text-align: center;
+  width: 400px;
+  color: #aaa;
+}
+
+#search_title {
+  margin-top: 40px;
+  width: 80px;
+  float: left;
+}
+
+#search_form {
+  margin-top: 40px;
+  width: 300px;
+  float: right;
+}
+
+#search_form input {
+  width: 240px;
+  height: 20px;
+  border: 0;
+  background-color: #f2f0f0;
+  border-bottom: solid 1px #ff5555;
+  margin-left: 5px;
+}
+
+/*상단 메뉴*/
+.top3 {
+  width: 400px;
+	float: right;
+  text-align: center;
+
+}
+
+#top_menu {
+	background-color: yellow;
+}
+
+/*하이라이트 설정*/
+/*메인, 서브 메뉴*/
+.gnb li:hover a {
+  color: #ff5555;
+  background-color: rgb(66, 66, 66, 0.5);
+}
+
+/*서브 메뉴*/
+.gnb ol li:hover a {
+  background-color: #888;
+  color: #ff5555;
+}
+
+/*=====슬라이딩=====*/
+.ban {
+  width: 720px;
+  height: 350px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.slide {
+  position: relative;
+  top: 0;
+  width: 720px;
+  height: 240px;
+}

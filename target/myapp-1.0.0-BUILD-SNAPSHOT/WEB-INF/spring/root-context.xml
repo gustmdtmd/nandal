@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- tiles -->
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/views/tiles/tiles.xml</value>
+				<value>/WEB-INF/views/tiles/boardTiles.xml</value>
+				<value>/WEB-INF/views/tiles/adminTiles.xml</value>
+				<value>/WEB-INF/views/tiles/userTiles.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- [1] DataSource 빈 선언 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@13.125.154.98:1521:xe" />
+		<property name="username" value="hr" />
+		<property name="password" value="a1234" />
+	</bean>
+
+	<!-- [2] SqlSessionFactoryBean 빈 선언 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:config/freeBoardMapper.xml</value>
+				<value>classpath:config/noticeBoardMapper.xml</value>
+				<value>classpath:config/qnaBoardMapper.xml</value>
+				<value>classpath:config/reviewBoardMapper.xml</value>
+				<value>classpath:config/admin_member.xml</value>
+				<value>classpath:config/userMapper.xml</value>
+				<value>classpath:config/noticeCommentMapper.xml</value>
+				<value>classpath:config/freeCommentMapper.xml</value>
+				<value>classpath:config/reviewCommentMapper.xml</value>
+				<value>classpath:config/qnaCommentMapper.xml</value>
+				<value>classpath:config/detailMapper.xml</value>
+				<value>classpath:config/indexMapper.xml</value>
+				<value>classpath:config/bookmarkMapper.xml</value>
+				<value>classpath:config/bookmarklistMapper.xml</value>
+			</list>
+		</property>
+	</bean> 
+
+	<!-- [3] SqlSessionTemplate 빈 선언 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>	
+	
+		<!-- [4] TranscationManager -->
+	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	 	<property name="dataSource" ref="dataSource" />
+	 </bean>
+	 
+	 
+	 	<!-- [9] View 빈 선언 -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="2" />
+	</bean>
+	
+	<!-- View -->
+	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<property name="order" value="1" />
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="3" />
+	</bean>
+</beans>

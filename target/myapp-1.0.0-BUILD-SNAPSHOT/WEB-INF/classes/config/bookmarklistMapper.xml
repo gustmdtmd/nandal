@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bookmarklist">
+
+	<select id="list" resultType="dto.DetailDTO">
+		select b.bookmarkcount, c.* from (
+		select contentid, count(contentid) as bookmarkcount 
+			from nandal_bookmark 
+			group by contentid 
+			order by bookmarkcount DESC) b
+		left join nandal_content_info c 
+		on b.contentid=c.contentid
+		<![CDATA[
+		where bookmarkcount != 0 and rownum < 5
+		]]>
+	</select>
+	
+</mapper>
